@@ -1,4 +1,5 @@
-const {addEvidence} = require('../controllers/evidence');
+const {addEvidence, getEvidences, deleteEvidence } = require('../controllers/evidence');
+
 const router = require('express').Router();
 
 /*router.get('/', (req,res) => {
@@ -6,5 +7,7 @@ const router = require('express').Router();
 })*/
 
 router.post('/add-evidence', addEvidence)
+    .get('/get-evidences', getEvidences)
+    .delete('/delete-evidence/:id', deleteEvidence)
 
 module.exports = router

@@ -32,3 +32,24 @@ exports.addEvidence = async(req,res) => {
         console.log(evidenceData);
 
 }
+
+exports.getEvidences = async (req, res) => {
+    try {
+        const evidences = await EvidenceModel.find().sort({createdAt: -1})
+        res.status(200).json(evidences)
+    } catch (error) {
+        res.status(500).json({message: 'Server Error'})
+        
+    }
+}
+
+exports.deleteEvidence = async (req, res) => {
+    const {id} = req.params;
+    EvidenceModel.findByIdAndDelete(id)
+    .then((evidence)=>{
+        res.status(200).json({message: 'Evidence Deleted'})
+    })
+    .catch((error) => {
+        res.status(500).json({message: 'Server Error'})
+    })
+}
